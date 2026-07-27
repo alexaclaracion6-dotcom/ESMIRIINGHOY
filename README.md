@@ -45,5 +45,16 @@ cd REPO
 A CRUD app for local home‑based food sellers to manage menu items, orders, customers, and sales.
 
   # Customer Records
+# Customers
+- customer_id (PK, unique)
+- full_name
+- contact_number
+- address
+
+## Sample Records
+| customer_id | full_name       | contact      | address                   | Orders| 
+|---|---|---|---|---|---|
+| C001        | Maria Santos    | 0917-123-4567 | Brgy. 25, CdeO           |   jollibee chicken 2pcs     | 
+| C002        | Juan Dela Cruz  | 0918-987-6543 | Brgy. Lapasan, CdeO      |    dunkin 1 box     |
 
 
