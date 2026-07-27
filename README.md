@@ -52,3 +52,16 @@ A CRUD app for local home‑based food sellers to manage menu items, orders, cus
 | C001        | Maria Santos    | 0917-123-4567 | Brgy. 25, CdeO           | 2pcs chicken joy               | pending |
 | C002        | Juan Dela Cruz  | 0918-987-6543 | Brgy. Lapasan, CdeO      | 3pcs burgers               | finish |
 
+  # Sales Records
+
+## Sample Records
+**Name:** _________________
+**Business:** Maramag Home Food Pre-orders
+**Period:** _________________
+
+| Date | Order No. | Customer Name | Items | Qty | Unit Price (₱) | Total (₱) | Payment Status | Delivery/Pickup | Remarks |
+|------|-----------|---------------|-------|-----|----------------|-----------|----------------|-----------------|---------|
+|  07-26-26    |      1     |      Maria Santos         |    chicken joy     |   2pcs  |        225        |     225      |       Gcash         |    delivery             |   done      |
+|   07-27-26   |      2     |       Juan Dela Cruz        |   burgers    |   3pcs  |      220          |    220       |        cash        |        pickup         |     done    |
+| **TOTAL** | --- | --- | **Total:** | **0** | --- | **₱ 0.00** | --- | --- | --- |
+
