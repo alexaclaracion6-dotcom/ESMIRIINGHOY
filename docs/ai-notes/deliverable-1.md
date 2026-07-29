@@ -85,3 +85,48 @@
 
 ---
 ## 📂 4. Repository File Structure
+
+# AI Scope Review & Stress‑Test — Deliverable 1
+## Project: Maramag Home Food Pre‑Order Manager
+**Team:** 5 students | **Time left:** 10 weeks
+
+---
+### ✅ What is COMPLETE and CORRECT
+- All 4 record types have **full C / R(List) / R(Detail) / U / D**
+- Every Delete story includes **confirmation**
+- All required screens: List, Detail, Create, Edit
+- All required states: Normal, Empty, Error, Delete Confirmation
+- Acceptance criteria present for every story
+- Ownership evenly spread across all 5 members
+- Scope is aligned with a **simple home‑pre‑order system** — no unnecessary complexity
+
+---
+### ⚠️ What is REALISTIC to KEEP
+- Manual stock updates (no auto‑deduction logic)
+- Basic status tracking only
+- Simple date/amount filtering
+- No user accounts or login — owner uses direct access
+- Manual sales logging
+- Basic list views only — no advanced dashboards
+
+---
+### ❌ What to CUT if you want to stay safe
+*(These are NOT required for full marks and will only add work)*
+- Do NOT add: automatic SMS/email alerts
+- Do NOT add: online payment gateway integration
+- Do NOT add: delivery route mapping
+- Do NOT add: user roles/permissions
+- Do NOT add: complex charts/graphs
+
+---
+### ✅ Final Verdict
+Your current scope is **realistic and achievable** for 5 students in 10 weeks.
+- No missing CRUD or screen‑state requirements
+- No over‑inflated features
+- Focus on making what you have **complete and working** — that earns full marks.
+
+---
+## 🧾 Decision Log
+- **Reviewed by:** AI Assistant
+- **Decision:** Keep all planned features; cut nothing from the required backlog.
+- **Reason:** All CRUD, screens, and states are complete; timeline is safe as long as you stick to the defined scope.
