@@ -10,11 +10,11 @@ Small home‑based food sellers currently track orders, stock, and customer deta
 # Team Roster & Starter Roles
 | Member Name | Starting Role | Primary Responsibility |
 |---|---|---|
-| [Aclaracion] | Repo Lead | Branch protection, merge rules, repo hygiene |
-| [Enclonar] | Board Lead | Task board setup, ticket tracking, status updates |
-| [Ansungay] | Scribe | Meeting notes, decisions, AI use log, retrospectives |
-| [Enclonar] | Builder 1 | Feature development, code reviews |
-| [Ansungay] | Builder 2 | Feature development, code reviews |
+| Aclaracion | Repo Lead | Branch protection, merge rules, repo hygiene |
+| Enclonar | Board Lead | Task board setup, ticket tracking, status updates |
+| Ansungay | Scribe | Meeting notes, decisions, AI use log, retrospectives |
+| Enclonar | Builder 1 | Feature development, code reviews |
+| Ansungay | Builder 2 | Feature development, code reviews |
 
 ## Core CRUD Entities & Record Types
 # Project: Maramag Home Food Pre‑Order Manager
