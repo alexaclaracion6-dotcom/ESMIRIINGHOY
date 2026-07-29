@@ -214,3 +214,35 @@ Your current scope is **realistic and achievable** for 5 students in 10 weeks.
 
 #### 📦 Menu Items
 **Menu List | Read (List) | Designer: Enclonar**
+
+
+---
+## 📑 PART 3 — AI SCOPE STRESS‑TEST NOTE
+**File:** `/docs/ai-notes/deliverable-1.md`
+```markdown
+# AI Scope Review — Deliverable 1
+**Project:** Maramag Home Food Pre‑Order Manager
+**Team:** Aclaracion · Enclonar · Ansungay | **Time:** 10 weeks remaining
+
+### ✅ COMPLETE & CORRECT
+- Full CRUD + dual Read views for all 4 entities
+- Delete always requires confirmation
+- All screens, normal/empty/error/confirm states present
+- Acceptance criteria on every story
+- Ownership correctly assigned to all team members matching README.md
+
+### ✅ REALISTIC TO KEEP
+- Manual stock & sales logging
+- Basic status tracking
+- Simple filters & list views
+- No login/accounts — direct owner access
+
+### ❌ NOT REQUIRED — DO NOT ADD
+- Auto notifications
+- Payment gateway integration
+- Delivery mapping
+- Advanced dashboards/reports
+- User roles/permissions
+
+### ✅ FINAL VERDICT
+**Scope is small, real, complete — fully achievable.** No gaps found. No unnecessary features included.
