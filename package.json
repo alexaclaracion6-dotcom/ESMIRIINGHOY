@@ -1,0 +1,4 @@
+{
+  "name": "lab3",
+  "dependencies": { "express": "^4.19.2" }
+}
