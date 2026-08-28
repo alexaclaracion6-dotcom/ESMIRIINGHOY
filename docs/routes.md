@@ -9,12 +9,17 @@
 | PUT    | /orders/:id    | updateOrder  | Edit an order         |
 | DELETE | /orders/:id    | deleteOrder  | Delete an order       |
 
+
 ---
 
-## ✅ Verification
-- ✅ All 5 CRUD operations have matching routes
-- ✅ GET used for reading only
-- ✅ POST used for creating
-- ✅ PUT used for updating
-- ✅ DELETE used for deleting
-- ✅ Paths follow RESTful conventions
+## ✅ Test Results
+
+### GET /orders
+**Request:** `GET http://localhost:3000/orders`
+**Status:** 200 ✅
+**Response:**
+```json
+{"status":200,"data":{"message":"listOrders stub"},"error":null}
+
+
+
