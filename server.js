@@ -52,3 +52,12 @@ app.delete('/orders/:id', (req, res) => {
 
 const PORT = 3000;
 app.listen(PORT, () => console.log("✅ Server running on port 3000"));
+
+// GET /orders — listOrders
+app.get('/orders', (req, res) => {
+  return res.status(200).json({
+    status: 200,
+    data: { message: "listOrders stub" },
+    error: null
+  });
+});
