@@ -1,24 +1,16 @@
-# API Routing Table
+# API Routes
 
-## Routes
-| Method | Path           | Handler      | Story it serves       |
-|--------|----------------|--------------|-----------------------|
-| GET    | /orders        | listOrders   | View all orders       |
-| GET    | /orders/:id    | showOrder    | View one order        |
-| POST   | /orders        | createOrder  | Create an order       |
-| PUT    | /orders/:id    | updateOrder  | Edit an order         |
-| DELETE | /orders/:id    | deleteOrder  | Delete an order       |
+| Method | Path | Handler |
+|---|---|---|
+| GET | /orders | listOrders |
+| GET | /orders/:id | showOrder |
+| POST | /orders | createOrder |
+| PUT | /orders/:id | updateOrder |
+| DELETE | /orders/:id | deleteOrder |
 
-## Example Requests & Responses
-
-### GET /orders
-**Request:**
-
-## Test Results — Example Request & Response
-
-### ✅ GET /orders
-**Request:** `GET http://localhost:3000/orders`
-**Response (200 OK):**
-```json
-{"status":200,"data":{"message":"listOrders stub"},"error":null}
-
+## Test Results
+- GET /orders → 200 ✅ `{"message":"listOrders stub"}`
+- GET /orders/42 → 200 ✅ `{"message":"showOrder stub","id":"42"}`
+- POST /orders → 201 ✅ `{"message":"createOrder stub"}`
+- PUT /orders/42 → 200 ✅ `{"message":"updateOrder stub","id":"42"}`
+- DELETE /orders/42 → 200 ✅ `{"message":"deleteOrder stub","id":"42"}`
