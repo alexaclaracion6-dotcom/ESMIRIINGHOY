@@ -61,3 +61,13 @@ app.get('/orders', (req, res) => {
     error: null
   });
 });
+
+// GET /orders/:id — showOrder
+app.get('/orders/:id', (req, res) => {
+  const { id } = req.params;
+  return res.status(200).json({
+    status: 200,
+    data: { message: "showOrder stub", id: id },
+    error: null
+  });
+});
