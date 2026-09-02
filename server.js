@@ -1,13 +1,15 @@
 // ==========================================
+// ✅ 1. SETUP — ALWAYS AT THE TOP
+// ==========================================
 const express = require('express');
-const app = express(); // 🔑 THIS CREATES "app" — NEVER SKIP THIS!
+const app = express(); // 🔑 NEVER DELETE THIS LINE!
 
 // ==========================================
-// Middleware
+// ✅ 2. MIDDLEWARE
 // ==========================================
 app.use(express.json());
 
-// Validation placeholder — Week 4 will replace this with REAL validation
+// Validation placeholder — Week 4 will replace with REAL validation
 app.use((req, res, next) => {
   req.validatedBody = { ...req.body };
   req.validatedParams = { ...req.params };
@@ -15,7 +17,7 @@ app.use((req, res, next) => {
 });
 
 // ==========================================
-// Import Controllers
+// ✅ 3. IMPORT CONTROLLERS — ONLY ONCE!
 // ==========================================
 const listOrders = require('./controllers/listOrders');
 const showOrder = require('./controllers/showOrder');
@@ -24,7 +26,7 @@ const updateOrder = require('./controllers/updateOrder');
 const deleteOrder = require('./controllers/deleteOrder');
 
 // ==========================================
-// Routes → Controllers (THIN — no validation here!)
+// ✅ 4. ROUTES → CONTROLLERS (THIN!)
 // ==========================================
 app.get('/orders', listOrders);
 app.get('/orders/:id', showOrder);
@@ -33,7 +35,7 @@ app.put('/orders/:id', updateOrder);
 app.delete('/orders/:id', deleteOrder);
 
 // ==========================================
-// Start Server
+// ✅ 5. START SERVER
 // ==========================================
 const PORT = 3000;
 app.listen(PORT, () => console.log("✅ Server running on port 3000"));
