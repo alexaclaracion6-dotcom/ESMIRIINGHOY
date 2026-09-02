@@ -1,6 +1,4 @@
 // ==========================================
-// ✅ SETUP — ALWAYS FIRST!
-// ==========================================
 const express = require('express');
 const app = express();
 
