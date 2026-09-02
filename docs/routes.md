@@ -52,8 +52,6 @@
 |---|---|---|
 | DELETE /orders (no ID) | curl -X DELETE http://localhost:3000/orders | Returns 404 Not Found — sensible error ✅ |
 
-<<<<<<< HEAD
-
 
 =======
 ---
