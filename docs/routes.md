@@ -52,10 +52,6 @@
 |---|---|---|
 | DELETE /orders (no ID) | curl -X DELETE http://localhost:3000/orders | Returns 404 Not Found — sensible error ✅ |
 
-<<<<<<< HEAD
-
-
-=======
 ---
 
 ## Notes
@@ -63,4 +59,3 @@
 - GET/PUT/DELETE return 200
 - POST returns 201 Created
 - Route parameter `:id` echoed back in response
->>>>>>> 8280a89269f472c431d150e305b5a042a0c54731
