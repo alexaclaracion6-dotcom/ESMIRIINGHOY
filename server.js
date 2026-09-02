@@ -1,5 +1,30 @@
 // Import controllers
 const ordersController = require('./controllers/ordersController');
+// Import ALL 5 controllers
+const listOrders = require('./controllers/listOrders');
+const showOrder = require('./controllers/showOrder');
+const createOrder = require('./controllers/createOrder');
+const updateOrder = require('./controllers/updateOrder');
+const deleteOrder = require('./controllers/deleteOrder');
+
+app.use(express.json());
+
+// Validation placeholder
+app.use((req, res, next) => {
+  req.validatedBody = { ...req.body };
+  req.validatedParams = { ...req.params };
+  next();
+});
+
+// Routes → Controllers
+app.get('/orders', listOrders);
+app.get('/orders/:id', showOrder);
+app.post('/orders', createOrder);
+app.put('/orders/:id', updateOrder);
+app.delete('/orders/:id', deleteOrder);
+
+const PORT = 3000;
+app.listen(PORT, () => console.log("✅ Server running on port 3000"));
 
 // POST /orders — Create order
 app.post('/orders', (req, res) => {
