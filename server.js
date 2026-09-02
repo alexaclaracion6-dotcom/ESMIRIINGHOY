@@ -1,3 +1,6 @@
+// Import controllers
+const ordersController = require('./controllers/ordersController');
+
 // POST /orders — Create order
 app.post('/orders', (req, res) => {
   const { item, qty, status } = req.body;
