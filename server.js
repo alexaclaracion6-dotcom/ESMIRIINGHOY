@@ -1,14 +1,14 @@
-// ==========================================
 const express = require('express');
 const app = express();
+
+// Middleware
 app.use(express.json());
-// ==========================================
-// ✅ RESPONSE SHAPE — AGREED BY TEAM: { status, data, error }
-// ==========================================
 
 // ==========================================
-// 🍽️ MENU ITEMS — Stub Handlers
+// 🍽️ MENU ROUTES — with Guard Clause Validation
 // ==========================================
+
+// GET /menu — View all menu items
 app.get('/menu', (req, res) => {
   return res.status(200).json({
     status: 200,
@@ -25,55 +25,100 @@ app.get('/menu', (req, res) => {
   });
 });
 
-app.post('/menu', (req, res) => {
-  const newItem = {
-    id: "M" + Date.now().toString().slice(-4),
-    name: req.body.name || "Unnamed Item",
-    price: req.body.price || 0,
-    description: req.body.description || "No description provided"
-  };
-  return res.status(201).json({
-    status: 201,
-    data: { message: "Menu item created successfully!", item: newItem },
-    error: null
-  });
-});
-
+// GET /menu/:id — View single menu item
 app.get('/menu/:id', (req, res) => {
   const { id } = req.params;
   return res.status(200).json({
     status: 200,
-    data: { message: "Menu item details", id: id, name: "Chicken Adobo", price: 120, description: "Braised chicken in soy sauce & vinegar" },
+    data: { message: "showMenu stub", id: id },
     error: null
   });
 });
 
+// POST /menu — Create menu item with validation
+app.post('/menu', (req, res) => {
+  const { name, price, description } = req.body;
+
+  // --- GUARD CLAUSES — Check BAD cases FIRST ---
+  if (!name) {
+    return res.status(422).json({ status: 422, error: "name is required", field: "name" });
+  }
+  if (typeof name !== "string") {
+    return res.status(422).json({ status: 422, error: "name must be text", field: "name" });
+  }
+  if (name.length < 1 || name.length > 100) {
+    return res.status(422).json({ status: 422, error: "name must be 1–100 characters", field: "name" });
+  }
+  if (price === undefined || price === null) {
+    return res.status(422).json({ status: 422, error: "price is required", field: "price" });
+  }
+  if (typeof price !== "number") {
+    return res.status(422).json({ status: 422, error: "price must be a number", field: "price" });
+  }
+  if (price < 0) {
+    return res.status(422).json({ status: 422, error: "price cannot be negative", field: "price" });
+  }
+  if (description !== undefined && typeof description === "string" && description.length > 250) {
+    return res.status(422).json({ status: 422, error: "description max 250 characters", field: "description" });
+  }
+  // --- ALL VALIDATION PASSED ---
+
+  return res.status(201).json({
+    status: 201,
+    data: { message: "createMenu stub", received: { name, price, description } },
+    error: null
+  });
+});
+
+// PUT /menu/:id — Update menu item with validation
 app.put('/menu/:id', (req, res) => {
   const { id } = req.params;
-  const updatedData = {
-    name: req.body.name || "Chicken Adobo",
-    price: req.body.price || 120,
-    description: req.body.description || "Braised chicken in soy sauce & vinegar"
-  };
+  const { name, price, description } = req.body;
+
+  // --- GUARD CLAUSES ---
+  if (name !== undefined) {
+    if (typeof name !== "string") {
+      return res.status(422).json({ status: 422, error: "name must be text", field: "name" });
+    }
+    if (name.length < 1 || name.length > 100) {
+      return res.status(422).json({ status: 422, error: "name must be 1–100 characters", field: "name" });
+    }
+  }
+  if (price !== undefined) {
+    if (typeof price !== "number") {
+      return res.status(422).json({ status: 422, error: "price must be a number", field: "price" });
+    }
+    if (price < 0) {
+      return res.status(422).json({ status: 422, error: "price cannot be negative", field: "price" });
+    }
+  }
+  if (description !== undefined && typeof description === "string" && description.length > 250) {
+    return res.status(422).json({ status: 422, error: "description max 250 characters", field: "description" });
+  }
+  // --- ALL VALIDATION PASSED ---
+
   return res.status(200).json({
     status: 200,
-    data: { message: "Menu item updated successfully!", id: id, updated: updatedData },
+    data: { message: "updateMenu stub", id: id, received: { name, price, description } },
     error: null
   });
 });
 
+// DELETE /menu/:id — Delete menu item
 app.delete('/menu/:id', (req, res) => {
   const { id } = req.params;
   return res.status(200).json({
     status: 200,
-    data: { message: "Menu item deleted successfully!", deletedId: id },
+    data: { message: "deleteMenu stub", deletedId: id },
     error: null
   });
 });
 
 // ==========================================
-// 📝 ORDERS — Stub Handlers
+// 📝 ORDER ROUTES — with Guard Clause Validation
 // ==========================================
+
+// GET /orders — View all orders
 app.get('/orders', (req, res) => {
   return res.status(200).json({
     status: 200,
@@ -90,14 +135,7 @@ app.get('/orders', (req, res) => {
   });
 });
 
-app.post('/orders', (req, res) => {
-  return res.status(201).json({
-    status: 201,
-    data: { message: "createOrder stub" },
-    error: null
-  });
-});
-
+// GET /orders/:id — View single order
 app.get('/orders/:id', (req, res) => {
   const { id } = req.params;
   return res.status(200).json({
@@ -107,28 +145,95 @@ app.get('/orders/:id', (req, res) => {
   });
 });
 
-app.put('/orders/:id', (req, res) => {
-  const { id } = req.params;
-  return res.status(200).json({
-    status: 200,
-    data: { message: "updateOrder stub", id: id },
+// POST /orders — Create order with validation
+app.post('/orders', (req, res) => {
+  const { item, qty, status } = req.body;
+  const ALLOWED_STATUSES = ["pending", "paid", "shipped"];
+
+  // --- GUARD CLAUSES — Check BAD cases FIRST ---
+  if (!item) {
+    return res.status(422).json({ status: 422, error: "item is required", field: "item" });
+  }
+  if (typeof item !== "string") {
+    return res.status(422).json({ status: 422, error: "item must be text", field: "item" });
+  }
+  if (item.length < 1 || item.length > 100) {
+    return res.status(422).json({ status: 422, error: "item must be 1–100 characters", field: "item" });
+  }
+  if (qty === undefined || qty === null) {
+    return res.status(422).json({ status: 422, error: "qty is required", field: "qty" });
+  }
+  if (typeof qty !== "number") {
+    return res.status(422).json({ status: 422, error: "qty must be a number", field: "qty" });
+  }
+  if (qty < 1 || qty > 999) {
+    return res.status(422).json({ status: 422, error: "qty must be 1–999", field: "qty" });
+  }
+  if (!status) {
+    return res.status(422).json({ status: 422, error: "status is required", field: "status" });
+  }
+  if (!ALLOWED_STATUSES.includes(status)) {
+    return res.status(422).json({ status: 422, error: "invalid status — allowed: pending, paid, shipped", field: "status" });
+  }
+  // --- ALL VALIDATION PASSED ---
+
+  return res.status(201).json({
+    status: 201,
+    data: { message: "createOrder stub", received: { item, qty, status } },
     error: null
   });
 });
 
+// PUT /orders/:id — Update order with validation
+app.put('/orders/:id', (req, res) => {
+  const { id } = req.params;
+  const { item, qty, status } = req.body;
+  const ALLOWED_STATUSES = ["pending", "paid", "shipped"];
+
+  // --- GUARD CLAUSES ---
+  if (item !== undefined) {
+    if (typeof item !== "string") {
+      return res.status(422).json({ status: 422, error: "item must be text", field: "item" });
+    }
+    if (item.length < 1 || item.length > 100) {
+      return res.status(422).json({ status: 422, error: "item must be 1–100 characters", field: "item" });
+    }
+  }
+  if (qty !== undefined) {
+    if (typeof qty !== "number") {
+      return res.status(422).json({ status: 422, error: "qty must be a number", field: "qty" });
+    }
+    if (qty < 1 || qty > 999) {
+      return res.status(422).json({ status: 422, error: "qty must be 1–999", field: "qty" });
+    }
+  }
+  if (status !== undefined && !ALLOWED_STATUSES.includes(status)) {
+    return res.status(422).json({ status: 422, error: "invalid status — allowed: pending, paid, shipped", field: "status" });
+  }
+  // --- ALL VALIDATION PASSED ---
+
+  return res.status(200).json({
+    status: 200,
+    data: { message: "updateOrder stub", id: id, received: { item, qty, status } },
+    error: null
+  });
+});
+
+// DELETE /orders/:id — Delete order
 app.delete('/orders/:id', (req, res) => {
   const { id } = req.params;
   return res.status(200).json({
     status: 200,
-    data: { message: "deleteOrder stub", id: id },
+    data: { message: "deleteOrder stub", deletedId: id },
     error: null
   });
 });
 
 // ==========================================
-// 👤 CUSTOMERS — Stub Handlers
+// 👤 CUSTOMER ROUTES — with Guard Clause Validation
 // ==========================================
-// ✅ BAGONG DAGDAG: GET ALL CUSTOMERS
+
+// GET /customers — View all customers
 app.get('/customers', (req, res) => {
   return res.status(200).json({
     status: 200,
@@ -142,55 +247,105 @@ app.get('/customers', (req, res) => {
   });
 });
 
-app.post('/customers', (req, res) => {
-  const newCustomer = {
-    id: "C" + Date.now().toString().slice(-4),
-    name: req.body.name || "Unnamed Customer",
-    phone: req.body.phone || "Not provided",
-    address: req.body.address || "Not provided"
-  };
-  return res.status(201).json({
-    status: 201,
-    data: { message: "Customer created successfully!", customer: newCustomer },
-    error: null
-  });
-});
-
+// GET /customers/:id — View single customer
 app.get('/customers/:id', (req, res) => {
   const { id } = req.params;
   return res.status(200).json({
     status: 200,
-    data: { message: "Customer details", id: id, name: "Maria Santos", phone: "09171234567", address: "Maramag, Bukidnon" },
+    data: { message: "showCustomer stub", id: id },
     error: null
   });
 });
 
+// POST /customers — Create customer with validation
+app.post('/customers', (req, res) => {
+  const { name, phone, address } = req.body;
+  const PHONE_PATTERN = /^09\d{9}$/; // starts with 09, 11 digits total
+
+  // --- GUARD CLAUSES ---
+  if (!name) {
+    return res.status(422).json({ status: 422, error: "name is required", field: "name" });
+  }
+  if (typeof name !== "string") {
+    return res.status(422).json({ status: 422, error: "name must be text", field: "name" });
+  }
+  if (name.length < 1 || name.length > 100) {
+    return res.status(422).json({ status: 422, error: "name must be 1–100 characters", field: "name" });
+  }
+  if (!phone) {
+    return res.status(422).json({ status: 422, error: "phone is required", field: "phone" });
+  }
+  if (!PHONE_PATTERN.test(phone)) {
+    return res.status(422).json({ status: 422, error: "phone must be 11 digits Philippine format (09XXXXXXXX)", field: "phone" });
+  }
+  if (!address) {
+    return res.status(422).json({ status: 422, error: "address is required", field: "address" });
+  }
+  if (typeof address !== "string") {
+    return res.status(422).json({ status: 422, error: "address must be text", field: "address" });
+  }
+  if (address.length < 5 || address.length > 250) {
+    return res.status(422).json({ status: 422, error: "address must be 5–250 characters", field: "address" });
+  }
+  // --- ALL VALIDATION PASSED ---
+
+  return res.status(201).json({
+    status: 201,
+    data: { message: "createCustomer stub", received: { name, phone, address } },
+    error: null
+  });
+});
+
+// PUT /customers/:id — Update customer with validation
 app.put('/customers/:id', (req, res) => {
   const { id } = req.params;
-  const updatedData = {
-    name: req.body.name || "Maria Santos",
-    phone: req.body.phone || "09171234567",
-    address: req.body.address || "Maramag, Bukidnon"
-  };
+  const { name, phone, address } = req.body;
+  const PHONE_PATTERN = /^09\d{9}$/;
+
+  // --- GUARD CLAUSES ---
+  if (name !== undefined) {
+    if (typeof name !== "string") {
+      return res.status(422).json({ status: 422, error: "name must be text", field: "name" });
+    }
+    if (name.length < 1 || name.length > 100) {
+      return res.status(422).json({ status: 422, error: "name must be 1–100 characters", field: "name" });
+    }
+  }
+  if (phone !== undefined && !PHONE_PATTERN.test(phone)) {
+    return res.status(422).json({ status: 422, error: "phone must be 11 digits Philippine format (09XXXXXXXX)", field: "phone" });
+  }
+  if (address !== undefined) {
+    if (typeof address !== "string") {
+      return res.status(422).json({ status: 422, error: "address must be text", field: "address" });
+    }
+    if (address.length < 5 || address.length > 250) {
+      return res.status(422).json({ status: 422, error: "address must be 5–250 characters", field: "address" });
+    }
+  }
+  // --- ALL VALIDATION PASSED ---
+
   return res.status(200).json({
     status: 200,
-    data: { message: "Customer updated successfully!", id: id, updated: updatedData },
+    data: { message: "updateCustomer stub", id: id, received: { name, phone, address } },
     error: null
   });
 });
 
+// DELETE /customers/:id — Delete customer
 app.delete('/customers/:id', (req, res) => {
   const { id } = req.params;
   return res.status(200).json({
     status: 200,
-    data: { message: "Customer deleted successfully!", deletedId: id },
+    data: { message: "deleteCustomer stub", deletedId: id },
     error: null
   });
 });
 
 // ==========================================
-// 💰 SALES — Stub Handlers
+// 💰 SALES ROUTES
 // ==========================================
+
+// GET /sales — View all sales records
 app.get('/sales', (req, res) => {
   return res.status(200).json({
     status: 200,
@@ -206,7 +361,11 @@ app.get('/sales', (req, res) => {
 });
 
 // ==========================================
-// ✅ START SERVER
+// START SERVER
 // ==========================================
 const PORT = 3000;
-app.listen(PORT, () => console.log("✅ Server running on port 3000"));
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
+
+module.exports = app;
