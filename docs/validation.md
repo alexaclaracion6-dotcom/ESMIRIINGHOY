@@ -52,6 +52,7 @@
 ## ✅ Error Response Standard
 All validation failures return this exact shape:
 
+
 ```json
 {
   "status": 422,
