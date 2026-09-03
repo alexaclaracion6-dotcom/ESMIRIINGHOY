@@ -1,15 +1,58 @@
-# Validation Matrix
+# Validation Rules — Maramag Home Food Pre-Order Manager
 
-## POST /orders — Create Order
-| Field   | Rules |
-|---------|-------|
-| item    | required, string, 1–100 chars |
-| qty     | required, number, 1–999 |
-| status  | required, one of: pending, shipped, cancelled |
+## 📋 Validation Vocabulary Key
+- **presence** = required / cannot be empty
+- **type** = must be correct data type (string, number, etc.)
+- **length/range** = must be within min/max limits
+- **format** = must match pattern
+- **allowed values** = must be from approved list
 
-## PUT /orders/:id — Update Order
-| Field   | Rules |
-|---------|-------|
-| item    | optional, string, 1–100 chars |
-| qty     | optional, number, 1–999 |
-| status  | optional, one of: pending, shipped, cancelled |
+---
+
+## 🍽️ Menu Items Validation
+
+| Route | Field | Rules |
+|---|---|---|
+| POST `/menu` | name | required, string, 1–100 characters |
+| POST `/menu` | price | required, number, minimum 0 |
+| POST `/menu` | description | optional, string, max 250 characters |
+| PUT `/menu/:id` | name | optional, string, 1–100 characters |
+| PUT `/menu/:id` | price | optional, number, minimum 0 |
+| PUT `/menu/:id` | description | optional, string, max 250 characters |
+
+---
+
+## 📝 Orders Validation
+
+| Route | Field | Rules |
+|---|---|---|
+| POST `/orders` | item | required, string, 1–100 characters |
+| POST `/orders` | qty | required, number, 1–999 |
+| POST `/orders` | status | required, one of: pending, paid, shipped |
+| PUT `/orders/:id` | item | optional, string, 1–100 characters |
+| PUT `/orders/:id` | qty | optional, number, 1–999 |
+| PUT `/orders/:id` | status | optional, one of: pending, paid, shipped |
+
+---
+
+## 👤 Customers Validation
+
+| Route | Field | Rules |
+|---|---|---|
+| POST `/customers` | name | required, string, 1–100 characters |
+| POST `/customers` | phone | required, string, Philippine format, 11 digits |
+| POST `/customers` | address | required, string, 5–250 characters |
+| PUT `/customers/:id` | name | optional, string, 1–100 characters |
+| PUT `/customers/:id` | phone | optional, string, Philippine format, 11 digits |
+| PUT `/customers/:id` | address | optional, string, 5–250 characters |
+
+---
+
+## ✅ Error Response Standard
+All validation failures return this shape:
+```json
+{
+  "status": 422,
+  "error": "qty out of range",
+  "field": "qty"
+}
