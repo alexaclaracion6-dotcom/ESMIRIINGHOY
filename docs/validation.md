@@ -66,6 +66,15 @@ Sensitive actions like DELETE or editing others' records require permission.
 
 **Pseudocode:**
 
+
+**Status Code Difference:**
+- **422** = Validation Error
+- **403** = Forbidden 
+
+**Applied to:**
+- `DELETE /orders/:id` — Only owner can delete
+- `DELETE /menu/:id` — Only owner can delete
+
 ---
 
 ## 🧪 Task 5 — Try to Break Your Own App
