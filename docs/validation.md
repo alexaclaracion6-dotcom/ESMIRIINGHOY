@@ -50,14 +50,14 @@
 ---
 
 ## ✅ Error Response Standard
-All validation failures return this shape:
+All validation failures return this exact shape:
+
 ```json
 {
   "status": 422,
   "error": "qty out of range",
   "field": "qty"
 }
-
 ---
 
 ## 🔐 Authorization Guard
