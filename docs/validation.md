@@ -1,24 +1,12 @@
-# Validation Rules — Maramag Home Food Pre-Order Manager
+# Validation Matrix — Maramag Home Food Pre-Order Manager
 
 ## 📋 Validation Vocabulary Key
 - **presence** = required / cannot be empty
 - **type** = must be correct data type (string, number, etc.)
 - **length/range** = must be within min/max limits
-- **format** = must match pattern
+- **format** = must match expected pattern
 - **allowed values** = must be from approved list
-
----
-
-## 🍽️ Menu Items Validation
-
-| Route | Field | Rules |
-|---|---|---|
-| POST `/menu` | name | required, string, 1–100 characters |
-| POST `/menu` | price | required, number, minimum 0 |
-| POST `/menu` | description | optional, string, max 250 characters |
-| PUT `/menu/:id` | name | optional, string, 1–100 characters |
-| PUT `/menu/:id` | price | optional, number, minimum 0 |
-| PUT `/menu/:id` | description | optional, string, max 250 characters |
+- **referential** = must exist in related data
 
 ---
 
@@ -32,6 +20,19 @@
 | PUT `/orders/:id` | item | optional, string, 1–100 characters |
 | PUT `/orders/:id` | qty | optional, number, 1–999 |
 | PUT `/orders/:id` | status | optional, one of: pending, paid, shipped |
+
+---
+
+## 🍽️ Menu Items Validation
+
+| Route | Field | Rules |
+|---|---|---|
+| POST `/menu` | name | required, string, 1–100 characters |
+| POST `/menu` | price | required, number, minimum 0 |
+| POST `/menu` | description | optional, string, max 250 characters |
+| PUT `/menu/:id` | name | optional, string, 1–100 characters |
+| PUT `/menu/:id` | price | optional, number, minimum 0 |
+| PUT `/menu/:id` | description | optional, string, max 250 characters |
 
 ---
 
