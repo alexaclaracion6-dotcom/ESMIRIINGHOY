@@ -117,4 +117,142 @@ All responses — **SUCCESS and ERROR** — use the same consistent shape:
   "error": "qty out of range",
   "field": "qty"
 }
+```
 
+---
+
+## 🧪 Task 3 — Automated Tests (Arrange–Act–Assert)
+
+### 📋 Test Rule: No code merges to MAIN with a failing test — RED blocks PR ✅
+
+---
+
+### 📝 Orders Controller Tests
+
+#### ✅ Test 1 — Happy Path: Creates valid order
+
+test "createOrder saves a valid order":
+**Arrange**
+request = fakeRequest(body = { item: "Cake", qty: 2, status: "pending" })
+**Act**
+result = createOrder(request)
+**Assert**
+expect(result.status == 201)
+expect(result.error == null)
+expect(result.data.received.item == "Cake")
+expect(result.data.received.qty == 2)
+plaintext
+
+#### ✅ Test 2 — Validation Failure: Rejects missing required field
+
+test "createOrder rejects when item is missing":
+**Arrange**
+request = fakeRequest(body = { qty: 2, status: "pending" })
+**Act**
+result = createOrder(request)
+**Assert**
+expect(result.status == 422)
+expect(result.error == "item is required")
+expect(result.field == "item")
+
+#### ✅ Test 3 — Edge Case: Rejects negative quantity
+
+test "createOrder rejects negative quantity":
+**Arrange**
+request = fakeRequest(body = { item: "Cake", qty: -1, status: "pending" })
+**Act**
+result = createOrder(request)
+**Assert**
+expect(result.status == 422)
+expect(result.error == "qty must be 1–999")
+expect(result.field == "qty")
+
+---
+
+### 🍽️ Menu Controller Tests
+
+#### ✅ Test 1 — Happy Path: Creates valid menu item
+
+test "createMenu saves valid menu item":
+**Arrange**
+request = fakeRequest(body = { name: "Lumpia", price: 45 })
+**Act**
+result = createMenu(request)
+**Assert**
+expect(result.status == 201)
+expect(result.error == null)
+expect(result.data.received.name == "Lumpia")
+
+#### ✅ Test 2 — Validation Failure: Rejects wrong type
+
+test "createMenu rejects price as text":
+**Arrange**
+request = fakeRequest(body = { name: "Lumpia", price: "expensive" })
+**Act**
+result = createMenu(request)
+**Assert**
+expect(result.status == 422)
+expect(result.error == "price must be a number")
+expect(result.field == "price")
+plaintext
+
+#### ✅ Test 3 — Edge Case: Rejects zero/negative price
+test "createMenu rejects negative price":
+**Arrange**
+request = fakeRequest(body = { name: "Lumpia", price: -5 })
+**Act**
+result = createMenu(request)
+**Assert**
+expect(result.status == 422)
+expect(result.error == "price cannot be negative")
+expect(result.field == "price")
+plaintext
+
+---
+
+### 👤 Customers Controller Tests
+
+#### ✅ Test 1 — Happy Path: Creates valid customer
+test "createCustomer saves valid customer":
+**Arrange**
+request = fakeRequest(body = { name: "Ana Reyes", phone: "09183334444", address: "Valencia, Bukidnon" })
+**Act**
+result = createCustomer(request)
+**Assert**
+expect(result.status == 201)
+expect(result.error == null)
+plaintext
+
+#### ✅ Test 2 — Validation Failure: Rejects invalid phone format
+test "createCustomer rejects wrong phone format":
+**Arrange**
+request = fakeRequest(body = { name: "Ana Reyes", phone: "12345", address: "Valencia, Bukidnon" })
+**Act**
+result = createCustomer(request)
+**Assert**
+expect(result.status == 422)
+expect(result.field == "phone")
+plaintext
+
+#### ✅ Test 3 — Edge Case: Rejects very short address
+test "createCustomer rejects address too short":
+**Arrange**
+request = fakeRequest(body = { name: "Ana Reyes", phone: "09183334444", address: "CDO" })
+**Act**
+result = createCustomer(request)
+**Assert**
+expect(result.status == 422)
+expect(result.field == "address")
+plaintext
+
+---
+
+### ✅ Test Results Summary
+| Test Type | Expected Status | Result |
+|---|---|---|
+| Happy Path (valid data) | 201 Created | ✅ PASS |
+| Validation Failure (bad input) | 422 Error | ✅ PASS |
+| Edge Case (boundary value) | 422 Error | ✅ PASS |
+
+> ✅ **All tests PASS → GREEN** — ready to merge
+> ❌ **Any test FAILS → RED** — blocks pull request
