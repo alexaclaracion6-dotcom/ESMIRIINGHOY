@@ -91,3 +91,30 @@ Sensitive actions like DELETE or editing others' records require permission.
 - All bad requests return **422 or 403** — **NO 500 ERRORS, NO CRASHES** ✅
 - Server stays running — invalid input is caught by guard clauses ✅
 - No raw errors or stack traces exposed to client ✅
+
+---
+
+## ✅ Standard Response Envelope
+
+All responses — **SUCCESS and ERROR** — use the same consistent shape:
+
+### ✅ Success Response Shape
+```json
+{
+  "status": 200,
+  "data": { "message": "listOrders stub" },
+  "error": null
+}
+```
+{
+  "status": 201,
+  "data": { "id": "O001", "item": "Chicken Adobo", "qty": 3 },
+  "error": null
+}
+```
+{
+  "status": 422,
+  "error": "qty out of range",
+  "field": "qty"
+}
+
