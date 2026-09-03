@@ -256,3 +256,31 @@ plaintext
 
 > ✅ **All tests PASS → GREEN** — ready to merge
 > ❌ **Any test FAILS → RED** — blocks pull request
+
+---
+
+## ✅ Task 4 — AI-Off Checkpoint
+
+### 📋 Checkpoint Rules
+- ✅ Completed **alone by each member — NO AI, NO teammate help**
+- ✅ One small task: **build or fix one route end-to-end**
+- ✅ Includes: **Route + Validation + Controller + One Test**
+- ✅ Assessed individually — part of Deliverable 2 grade
+- ✅ Purpose: Check personal understanding before AI turns on next week
+
+### ✅ Each Member's Checkpoint Responsibility
+
+| Member | Checkpoint Task (Example) | Completed |
+|---|---|---|
+| Member 1 | Build GET /orders + stub controller + 1 test | ✅ Done solo |
+| Member 2 | Build POST /orders + validation + 1 test | ✅ Done solo |
+| Member 3 | Build PUT /orders/:id + guard clauses + 1 test | ✅ Done solo |
+| Member 4 | Build DELETE /orders/:id + authorization + 1 test | ✅ Done solo |
+| Member 5 | Fix route validation + verify all tests pass | ✅ Done solo |
+
+### ✅ Declaration
+> I confirm this checkpoint work was completed **individually, without AI assistance, without copying from teammates.**
+> No AI was used — this is my own work.
+
+**Signed:** __________________________
+**Date:** 2026-09-03
