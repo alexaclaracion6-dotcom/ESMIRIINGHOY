@@ -50,8 +50,6 @@
 ---
 
 ## ✅ Error Response Standard
-All validation failures return this exact shape:
-
 
 ```json
 {
@@ -60,15 +58,14 @@ All validation failures return this exact shape:
   "field": "qty"
 }
 
-json```
+```
 ---
 
 ## 🔐 Authorization Guard
 
 Sensitive actions like DELETE or editing others' records require permission.
 
-**Pseudocode:**
-
+**Pseudocode**
 
 **Status Code Difference:**
 - **422** = Validation Error
