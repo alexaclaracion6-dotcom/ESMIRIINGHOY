@@ -65,3 +65,20 @@ All validation failures return this exact shape:
 Sensitive actions like DELETE or editing others' records require permission.
 
 **Pseudocode:**
+
+---
+
+## 🧪 Task 5 — Try to Break Your Own App
+
+| # | Attempt / Bad Request | Expected Result | Actual Result |
+|---|---|---|---|
+| 1 | **Missing required field** — send POST `/orders` without `item` | 422, "item is required" | ✅ Returns 422 — no crash |
+| 2 | **Wrong type** — send `qty: "cake"` (text instead of number) | 422, "qty must be a number" | ✅ Returns 422 — no crash |
+| 3 | **Out-of-range value** — send `qty: 0` or `qty: 9999` | 422, "qty must be 1–999" | ✅ Returns 422 — no crash |
+| 4 | **Invalid status** — send `status: "cancelled"` (not in allowed list) | 422, "invalid status" | ✅ Returns 422 — no crash |
+| 5 | **Forbidden action** — DELETE without permission header | 403, "not allowed" | ✅ Returns 403 — no crash |
+
+### ✅ Summary
+- All bad requests return **422 or 403** — **NO 500 ERRORS, NO CRASHES** ✅
+- Server stays running — invalid input is caught by guard clauses ✅
+- No raw errors or stack traces exposed to client ✅
