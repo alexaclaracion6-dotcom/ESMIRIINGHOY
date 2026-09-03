@@ -59,6 +59,8 @@ All validation failures return this exact shape:
   "error": "qty out of range",
   "field": "qty"
 }
+
+json```
 ---
 
 ## 🔐 Authorization Guard
