@@ -58,7 +58,10 @@ All validation failures return this shape:
   "field": "qty"
 }
 
+---
+
 ## 🔐 Authorization Guard
-Sensitive actions (DELETE, editing others' records) require permission:
+
+Sensitive actions like DELETE or editing others' records require permission.
 
 **Pseudocode:**
