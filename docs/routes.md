@@ -1,4 +1,4 @@
-# 📋 Routing Table & Test Results — Maramag Home Food Pre-Order Manager
+# 📋 API Routing Table — Maramag Home Food Pre-Order Manager
 
 ## Complete Routing Table
 
@@ -27,35 +27,36 @@
 
 | Route | Example Request | Example Response |
 |---|---|---|
-| GET /menu | curl http://localhost:3000/menu | {"status":200,"data":{"message":"listMenuItems stub"},"error":null} |
-| POST /menu | curl -X POST http://localhost:3000/menu | {"status":201,"data":{"message":"createMenuItem stub"},"error":null} |
-| GET /menu/:id | curl http://localhost:3000/menu/M001 | {"status":200,"data":{"message":"showMenuItem stub","id":"M001"},"error":null} |
-| PUT /menu/:id | curl -X PUT http://localhost:3000/menu/M001 | {"status":200,"data":{"message":"updateMenuItem stub","id":"M001"},"error":null} |
-| DELETE /menu/:id | curl -X DELETE http://localhost:3000/menu/M001 | {"status":200,"data":{"message":"deleteMenuItem stub","id":"M001"},"error":null} |
-| GET /orders | curl http://localhost:3000/orders | {"status":200,"data":{"message":"listOrders stub"},"error":null} |
-| POST /orders | curl -X POST http://localhost:3000/orders | {"status":201,"data":{"message":"createOrder stub"},"error":null} |
-| GET /orders/:id | curl http://localhost:3000/orders/O001 | {"status":200,"data":{"message":"showOrder stub","id":"O001"},"error":null} |
-| PUT /orders/:id | curl -X PUT http://localhost:3000/orders/O001 | {"status":200,"data":{"message":"updateOrder stub","id":"O001"},"error":null} |
-| DELETE /orders/:id | curl -X DELETE http://localhost:3000/orders/O001 | {"status":200,"data":{"message":"deleteOrder stub","id":"O001"},"error":null} |
-| GET /customers | curl http://localhost:3000/customers | {"status":200,"data":{"message":"listCustomers stub"},"error":null} |
-| POST /customers | curl -X POST http://localhost:3000/customers | {"status":201,"data":{"message":"createCustomer stub"},"error":null} |
-| GET /customers/:id | curl http://localhost:3000/customers/C001 | {"status":200,"data":{"message":"showCustomer stub","id":"C001"},"error":null} |
-| PUT /customers/:id | curl -X PUT http://localhost:3000/customers/C001 | {"status":200,"data":{"message":"updateCustomer stub","id":"C001"},"error":null} |
-| DELETE /customers/:id | curl -X DELETE http://localhost:3000/customers/C001 | {"status":200,"data":{"message":"deleteCustomer stub","id":"C001"},"error":null} |
-| GET /sales | curl http://localhost:3000/sales | {"status":200,"data":{"message":"listSales stub"},"error":null} |
+| GET /menu | `curl http://localhost:3000/menu` | `{"status":200,"data":{"message":"listMenuItems stub"},"error":null}` |
+| POST /menu | `curl -X POST http://localhost:3000/menu` | `{"status":201,"data":{"message":"createMenuItem stub"},"error":null}` |
+| GET /menu/:id | `curl http://localhost:3000/menu/M001` | `{"status":200,"data":{"message":"showMenuItem stub","id":"M001"},"error":null}` |
+| PUT /menu/:id | `curl -X PUT http://localhost:3000/menu/M001` | `{"status":200,"data":{"message":"updateMenuItem stub","id":"M001"},"error":null}` |
+| DELETE /menu/:id | `curl -X DELETE http://localhost:3000/menu/M001` | `{"status":200,"data":{"message":"deleteMenuItem stub","id":"M001"},"error":null}` |
+| GET /orders | `curl http://localhost:3000/orders` | `{"status":200,"data":{"message":"listOrders stub"},"error":null}` |
+| POST /orders | `curl -X POST http://localhost:3000/orders` | `{"status":201,"data":{"message":"createOrder stub"},"error":null}` |
+| GET /orders/:id | `curl http://localhost:3000/orders/O001` | `{"status":200,"data":{"message":"showOrder stub","id":"O001"},"error":null}` |
+| PUT /orders/:id | `curl -X PUT http://localhost:3000/orders/O001` | `{"status":200,"data":{"message":"updateOrder stub","id":"O001"},"error":null}` |
+| DELETE /orders/:id | `curl -X DELETE http://localhost:3000/orders/O001` | `{"status":200,"data":{"message":"deleteOrder stub","id":"O001"},"error":null}` |
+| GET /customers | `curl http://localhost:3000/customers` | `{"status":200,"data":{"message":"listCustomers stub"},"error":null}` |
+| POST /customers | `curl -X POST http://localhost:3000/customers` | `{"status":201,"data":{"message":"createCustomer stub"},"error":null}` |
+| GET /customers/:id | `curl http://localhost:3000/customers/C001` | `{"status":200,"data":{"message":"showCustomer stub","id":"C001"},"error":null}` |
+| PUT /customers/:id | `curl -X PUT http://localhost:3000/customers/C001` | `{"status":200,"data":{"message":"updateCustomer stub","id":"C001"},"error":null}` |
+| DELETE /customers/:id | `curl -X DELETE http://localhost:3000/customers/C001` | `{"status":200,"data":{"message":"deleteCustomer stub","id":"C001"},"error":null}` |
+| GET /sales | `curl http://localhost:3000/sales` | `{"status":200,"data":{"message":"listSales stub"},"error":null}` |
 
 ---
 
 ## Wrong Method Test
 
-| Test Case | Request | Result |
+| Test Case | Request | Expected Result |
 |---|---|---|
-| DELETE /orders (no ID) | curl -X DELETE http://localhost:3000/orders | Returns 404 Not Found — sensible error ✅ |
+| DELETE /orders (no ID) | `curl -X DELETE http://localhost:3000/orders` | Returns 404 Not Found — sensible error ✅ |
 
 ---
 
-## Notes
-- All responses follow shape: `{ status, data, error }`
-- GET/PUT/DELETE return 200
-- POST returns 201 Created
-- Route parameter `:id` echoed back in response
+## Standards & Notes
+
+- **Response Shape:** Always `{ status, data, error }`
+- **Status Codes:** GET/PUT/DELETE → 200 OK | POST → 201 Created
+- **Route Parameters:** `:id` is echoed back in every response
+- **AI Use:** No AI used. Written manually per lab instructions.
