@@ -57,3 +57,10 @@ All validation failures return this shape:
   "error": "qty out of range",
   "field": "qty"
 }
+
+---
+
+## 🔐 Authorization Guard
+Sensitive actions (DELETE, editing others' records) require permission:
+
+**Pseudocode:**
