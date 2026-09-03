@@ -1,62 +1,240 @@
-# 📋 API Routing Table — Maramag Home Food Pre-Order Manager
+# API Routes — Maramag Home Food Pre-Order Manager
 
-## Complete Routing Table
-
-| # | Method | Path | Handler | Expected Status | Purpose |
-|---|---|---|---|---|---|
-| 1 | GET | /menu | listMenuItems | 200 OK | View all menu items |
-| 2 | POST | /menu | createMenuItem | 201 Created | Add new menu item |
-| 3 | GET | /menu/:id | showMenuItem | 200 OK | View one menu item |
-| 4 | PUT | /menu/:id | updateMenuItem | 200 OK | Edit menu item |
-| 5 | DELETE | /menu/:id | deleteMenuItem | 200 OK | Remove menu item |
-| 6 | GET | /orders | listOrders | 200 OK | View all orders |
-| 7 | POST | /orders | createOrder | 201 Created | Place new order |
-| 8 | GET | /orders/:id | showOrder | 200 OK | View one order |
-| 9 | PUT | /orders/:id | updateOrder | 200 OK | Edit order |
-| 10 | DELETE | /orders/:id | deleteOrder | 200 OK | Cancel order |
-| 11 | GET | /customers | listCustomers | 200 OK | View all customers |
-| 12 | POST | /customers | createCustomer | 201 Created | Add new customer |
-| 13 | GET | /customers/:id | showCustomer | 200 OK | View one customer |
-| 14 | PUT | /customers/:id | updateCustomer | 200 OK | Edit customer |
-| 15 | DELETE | /customers/:id | deleteCustomer | 200 OK | Remove customer |
-| 16 | GET | /sales | listSales | 200 OK | View sales records |
+**Base URL:** `https://fantastic-spoon-jr4rg4grq94pfj7vp-3000.app.github.dev`
+**Response Standard:** `{ status, data, error }`
 
 ---
 
-## Example Request & Response
+## 📋 Routing Table
 
-| Route | Example Request | Example Response |
-|---|---|---|
-| GET /menu | `curl http://localhost:3000/menu` | `{"status":200,"data":{"message":"listMenuItems stub"},"error":null}` |
-| POST /menu | `curl -X POST http://localhost:3000/menu` | `{"status":201,"data":{"message":"createMenuItem stub"},"error":null}` |
-| GET /menu/:id | `curl http://localhost:3000/menu/M001` | `{"status":200,"data":{"message":"showMenuItem stub","id":"M001"},"error":null}` |
-| PUT /menu/:id | `curl -X PUT http://localhost:3000/menu/M001` | `{"status":200,"data":{"message":"updateMenuItem stub","id":"M001"},"error":null}` |
-| DELETE /menu/:id | `curl -X DELETE http://localhost:3000/menu/M001` | `{"status":200,"data":{"message":"deleteMenuItem stub","id":"M001"},"error":null}` |
-| GET /orders | `curl http://localhost:3000/orders` | `{"status":200,"data":{"message":"listOrders stub"},"error":null}` |
-| POST /orders | `curl -X POST http://localhost:3000/orders` | `{"status":201,"data":{"message":"createOrder stub"},"error":null}` |
-| GET /orders/:id | `curl http://localhost:3000/orders/O001` | `{"status":200,"data":{"message":"showOrder stub","id":"O001"},"error":null}` |
-| PUT /orders/:id | `curl -X PUT http://localhost:3000/orders/O001` | `{"status":200,"data":{"message":"updateOrder stub","id":"O001"},"error":null}` |
-| DELETE /orders/:id | `curl -X DELETE http://localhost:3000/orders/O001` | `{"status":200,"data":{"message":"deleteOrder stub","id":"O001"},"error":null}` |
-| GET /customers | `curl http://localhost:3000/customers` | `{"status":200,"data":{"message":"listCustomers stub"},"error":null}` |
-| POST /customers | `curl -X POST http://localhost:3000/customers` | `{"status":201,"data":{"message":"createCustomer stub"},"error":null}` |
-| GET /customers/:id | `curl http://localhost:3000/customers/C001` | `{"status":200,"data":{"message":"showCustomer stub","id":"C001"},"error":null}` |
-| PUT /customers/:id | `curl -X PUT http://localhost:3000/customers/C001` | `{"status":200,"data":{"message":"updateCustomer stub","id":"C001"},"error":null}` |
-| DELETE /customers/:id | `curl -X DELETE http://localhost:3000/customers/C001` | `{"status":200,"data":{"message":"deleteCustomer stub","id":"C001"},"error":null}` |
-| GET /sales | `curl http://localhost:3000/sales` | `{"status":200,"data":{"message":"listSales stub"},"error":null}` |
-
----
-
-## Wrong Method Test
-
-| Test Case | Request | Expected Result |
-|---|---|---|
-| DELETE /orders (no ID) | `curl -X DELETE http://localhost:3000/orders` | Returns 404 Not Found — sensible error ✅ |
+| Method | Path | Handler | Story |
+|---|---|---|---|
+| GET | `/menu` | listMenu | View all menu items |
+| GET | `/menu/:id` | showMenu | View single menu item |
+| POST | `/menu` | createMenu | Add new menu item |
+| PUT | `/menu/:id` | updateMenu | Edit menu item |
+| DELETE | `/menu/:id` | deleteMenu | Remove menu item |
+| GET | `/orders` | listOrders | View all orders |
+| GET | `/orders/:id` | showOrder | View single order |
+| POST | `/orders` | createOrder | Place new order |
+| PUT | `/orders/:id` | updateOrder | Edit order |
+| DELETE | `/orders/:id` | deleteOrder | Cancel/remove order |
+| GET | `/customers` | listCustomers | View all customers |
+| GET | `/customers/:id` | showCustomer | View single customer |
+| POST | `/customers` | createCustomer | Add new customer |
+| PUT | `/customers/:id` | updateCustomer | Edit customer info |
+| DELETE | `/customers/:id` | deleteCustomer | Remove customer |
+| GET | `/sales` | listSales | View all sales records |
 
 ---
 
-## Standards & Notes
+## 🍽️ Menu Items
 
-- **Response Shape:** Always `{ status, data, error }`
-- **Status Codes:** GET/PUT/DELETE → 200 OK | POST → 201 Created
-- **Route Parameters:** `:id` is echoed back in every response
-- **AI Use:** No AI used. Written manually per lab instructions.
+### ✅ GET `/menu`
+**Request:** `GET /menu`
+
+**Response:**
+```json
+{
+  "status": 200,
+  "data": {
+    "menuItems": [
+      { "id": "M001", "name": "Chicken Adobo", "price": 120.00, "description": "Braised chicken in soy sauce & vinegar" },
+      { "id": "M002", "name": "Pork Sinigang", "price": 150.00, "description": "Sour tamarind soup with pork & vegetables" },
+      { "id": "M003", "name": "Beef Caldereta", "price": 180.00, "description": "Spicy beef stew in tomato sauce" },
+      { "id": "M004", "name": "Fried Rice", "price": 35.00, "description": "Garlic fried rice" },
+      { "id": "M005", "name": "Grilled Fish", "price": 130.00, "description": "Fresh tilapia grilled to perfection" }
+    ]
+  },
+  "error": null
+}
+
+✅ GET /menu/:id
+Request: GET /menu/M001
+Response:
+json
+{
+  "status": 200,
+  "data": {
+    "message": "Menu item details",
+    "id": "M001",
+    "name": "Chicken Adobo",
+    "price": 120,
+    "description": "Braised chicken in soy sauce & vinegar"
+  },
+  "error": null
+}
+
+✅ POST /menu
+Request:
+http
+POST /menu
+Content-Type: application/json
+
+{ "name": "Lumpia", "price": 45, "description": "Fried spring rolls" }
+Response:
+json
+{
+  "status": 201,
+  "data": {
+    "message": "Menu item created successfully!",
+    "item": { "id": "M5678", "name": "Lumpia", "price": 45, "description": "Fried spring rolls" }
+  },
+  "error": null
+}
+✅ PUT /menu/:id
+Request:
+http
+PUT /menu/M001
+Content-Type: application/json
+
+{ "price": 130 }
+Response:
+json
+{
+  "status": 200,
+  "data": {
+    "message": "Menu item updated successfully!",
+    "id": "M001",
+    "updated": { "name": "Chicken Adobo", "price": 130, "description": "Braised chicken in soy sauce & vinegar" }
+  },
+  "error": null
+}
+✅ DELETE /menu/:id
+Request: DELETE /menu/M005
+Response:
+json
+{
+  "status": 200,
+  "data": { "message": "Menu item deleted successfully!", "deletedId": "M005" },
+  "error": null
+}
+📝 Orders
+✅ GET /orders
+Request: GET /orders
+Response Table:
+Table
+ID	Item	Quantity	Status
+O001	Chicken Adobo	3	pending
+O002	Pork Sinigang	2	paid
+O003	Beef Caldereta	5	shipped
+O004	Fried Rice	10	pending
+O005	Grilled Fish	1	paid
+✅ GET /orders/:id
+Request: GET /orders/O001
+Response:
+json
+{
+  "status": 200,
+  "data": { "message": "showOrder stub", "id": "O001" },
+  "error": null
+}
+✅ POST /orders
+Request:
+http
+POST /orders
+Content-Type: application/json
+
+{ "item": "Lumpia", "qty": 5, "status": "pending" }
+Response:
+json
+{
+  "status": 201,
+  "data": { "message": "createOrder stub" },
+  "error": null
+}
+✅ PUT /orders/:id
+Request: PUT /orders/O001
+Response:
+json
+{
+  "status": 200,
+  "data": { "message": "updateOrder stub", "id": "O001" },
+  "error": null
+}
+✅ DELETE /orders/:id
+Request: DELETE /orders/O001
+Response:
+json
+{
+  "status": 200,
+  "data": { "message": "deleteOrder stub", "id": "O001" },
+  "error": null
+}
+👤 Customers
+✅ GET /customers
+Request: GET /customers
+Response Table:
+Table
+ID	Name	Phone	Address
+C001	Maria Santos	09171234567	Maramag, Bukidnon
+C002	Juan Dela Cruz	09171112222	Poblacion, Maramag
+✅ GET /customers/:id
+Request: GET /customers/C001
+Response:
+json
+{
+  "status": 200,
+  "data": {
+    "message": "Customer details",
+    "id": "C001",
+    "name": "Maria Santos",
+    "phone": "09171234567",
+    "address": "Maramag, Bukidnon"
+  },
+  "error": null
+}
+✅ POST /customers
+Request:
+http
+POST /customers
+Content-Type: application/json
+
+{ "name": "Ana Reyes", "phone": "09183334444", "address": "Valencia, Bukidnon" }
+Response:
+json
+{
+  "status": 201,
+  "data": {
+    "message": "Customer created successfully!",
+    "customer": { "id": "C5678", "name": "Ana Reyes", "phone": "09183334444", "address": "Valencia, Bukidnon" }
+  },
+  "error": null
+}
+✅ PUT /customers/:id
+Request: PUT /customers/C001
+Response:
+json
+{
+  "status": 200,
+  "data": {
+    "message": "Customer updated successfully!",
+    "id": "C001",
+    "updated": { "name": "Maria Santos", "phone": "09179998888", "address": "Maramag, Bukidnon" }
+  },
+  "error": null
+}
+✅ DELETE /customers/:id
+Request: DELETE /customers/C001
+Response:
+json
+{
+  "status": 200,
+  "data": { "message": "Customer deleted successfully!", "deletedId": "C001" },
+  "error": null
+}
+💰 Sales
+✅ GET /sales
+Request: GET /sales
+Response Table:
+Table
+ID	Order ID	Item	Quantity	Total	Date
+S001	O001	Chicken Adobo	3	₱360	2026-09-01
+S002	O002	Pork Sinigang	2	₱300	2026-09-02
+S003	O003	Beef Caldereta	5	₱900	2026-09-03
+✅ Status Codes Reference
+Table
+Code	Meaning	Used For
+200	OK	GET, PUT, DELETE success
+201	Created	POST success
+404	Not Found	Invalid route / wrong ID
