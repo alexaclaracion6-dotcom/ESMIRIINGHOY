@@ -104,9 +104,22 @@ app.put('/menu/:id', (req, res) => {
   });
 });
 
-// DELETE /menu/:id — Delete menu item
+// DELETE /menu/:id — Delete menu item (with Authorization Guard)
 app.delete('/menu/:id', (req, res) => {
   const { id } = req.params;
+  // --- AUTHORIZATION GUARD ---
+  const currentUserId = req.headers['x-user-id'];
+  const menuOwnerId = "user-owner-123"; // Simulated owner
+
+  if (!currentUserId || currentUserId !== menuOwnerId) {
+    return res.status(403).json({
+      status: 403,
+      error: "You are not allowed to delete this menu item",
+      action: "delete"
+    });
+  }
+  // --- AUTHORIZATION PASSED ---
+
   return res.status(200).json({
     status: 200,
     data: { message: "deleteMenu stub", deletedId: id },
@@ -219,9 +232,24 @@ app.put('/orders/:id', (req, res) => {
   });
 });
 
-// DELETE /orders/:id — Delete order
+// DELETE /orders/:id — Delete order (with Authorization Guard)
 app.delete('/orders/:id', (req, res) => {
   const { id } = req.params;
+  // --- AUTHORIZATION GUARD ---
+  // Placement: Check PERMISSION BEFORE allowing delete
+  const currentUserId = req.headers['x-user-id']; // Simulated: current logged-in user
+  const orderOwnerId = "user-owner-123"; // Simulated: who owns this order (from database later)
+  
+  if (!currentUserId || currentUserId !== orderOwnerId) {
+    // 403 = FORBIDDEN — different from validation's 422!
+    return res.status(403).json({
+      status: 403,
+      error: "You are not allowed to delete this order",
+      action: "delete"
+    });
+  }
+  // --- AUTHORIZATION PASSED — proceed safely ---
+
   return res.status(200).json({
     status: 200,
     data: { message: "deleteOrder stub", deletedId: id },
