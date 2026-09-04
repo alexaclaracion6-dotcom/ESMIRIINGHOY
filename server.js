@@ -4,29 +4,19 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// ==========================================
-// CONFIG — ADD THIS AT THE TOP
-// ==========================================
-const PORT = process.env.PORT || 4444;
-const FRONTEND_URL = "https://maramag-meal-flow.base44.app";
+const express = require('express');
+const app = express();
 
-// CORS — ALLOW YOUR DASHBOARD TO CONNECT
-const cors = require('cors');
-const allowedOrigins = [
-  FRONTEND_URL,
-  "http://localhost:4444"
-];
+app.use(express.json());
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));
+// ✅ SIMPLE CORS — WORKS EVERYWHERE (Codespaces + local)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  if (req.method === "OPTIONS") return res.sendStatus(200);
+  next();
+});
 
 // ==========================================
 // 🍽️ MENU ROUTES — with Guard Clause Validation
@@ -411,13 +401,15 @@ app.get('/sales', (req, res) => {
     error: null
   });
 });
+
+
 // ==========================================
-// ✅ START SERVER — MUST BE AT THE BOTTOM!
+// ✅ SERVER START — BOTTOM OF FILE
 // ==========================================
 const PORT = 4444;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📡 API ready for: ${FRONTEND_URL}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`✅ Test in browser: https://your-url-4444.app.github.dev/orders`);
 });
 
 module.exports = app;
