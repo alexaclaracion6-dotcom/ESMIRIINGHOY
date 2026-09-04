@@ -406,9 +406,8 @@ app.get('/sales', (req, res) => {
     error: null
   });
 });
-
 // ==========================================
-// START SERVER
+// ✅ START SERVER — MUST BE AT THE BOTTOM!
 // ==========================================
 const PORT = 3000;
 app.listen(PORT, () => {
