@@ -409,7 +409,7 @@ app.get('/sales', (req, res) => {
 // ==========================================
 // ✅ START SERVER — MUST BE AT THE BOTTOM!
 // ==========================================
-const PORT = 3000;
+const PORT = 4444;
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
