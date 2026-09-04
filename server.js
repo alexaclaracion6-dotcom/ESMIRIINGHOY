@@ -5,6 +5,25 @@ const app = express();
 app.use(express.json());
 
 // ==========================================
+// ✅ CORS — ALLOW BASE44 WEBSITE TO CONNECT
+// ==========================================
+app.use((req, res, next) => {
+  // Allow your Base44 website to connect
+  res.header("Access-Control-Allow-Origin", "*");
+  // Allow the headers we use
+  res.header("Access-Control-Allow-Headers", "Content-Type, x-user-id");
+  // Allow all CRUD methods
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  
+  // Auto-respond to preflight requests
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  
+  next();
+});
+
+// ==========================================
 // 🍽️ MENU ROUTES — with Guard Clause Validation
 // ==========================================
 
