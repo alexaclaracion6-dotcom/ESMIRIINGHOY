@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Maramag Home Food Pre-Order Manager - CRUD app for home-based food sellers",
   "main": "server.js",
-  "scripts": {
     "scripts": {
       "start": "node server.js",
       "test": "jest --verbose --forceExit"
