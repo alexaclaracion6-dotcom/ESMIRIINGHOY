@@ -5,23 +5,28 @@ const app = express();
 app.use(express.json());
 
 // ==========================================
-// ✅ CORS — ALLOW BASE44 WEBSITE TO CONNECT
+// CONFIG — ADD THIS AT THE TOP
 // ==========================================
-app.use((req, res, next) => {
-  // Allow your Base44 website to connect
-  res.header("Access-Control-Allow-Origin", "*");
-  // Allow the headers we use
-  res.header("Access-Control-Allow-Headers", "Content-Type, x-user-id");
-  // Allow all CRUD methods
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  
-  // Auto-respond to preflight requests
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-  
-  next();
-});
+const PORT = process.env.PORT || 4444;
+const FRONTEND_URL = "https://maramag-meal-flow.base44.app";
+
+// CORS — ALLOW YOUR DASHBOARD TO CONNECT
+const cors = require('cors');
+const allowedOrigins = [
+  FRONTEND_URL,
+  "http://localhost:4444"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 // ==========================================
 // 🍽️ MENU ROUTES — with Guard Clause Validation
@@ -411,7 +416,8 @@ app.get('/sales', (req, res) => {
 // ==========================================
 const PORT = 4444;
 app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📡 API ready for: ${FRONTEND_URL}`);
 });
 
 module.exports = app;
