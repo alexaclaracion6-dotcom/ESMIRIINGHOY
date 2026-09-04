@@ -1,6 +1,6 @@
 # API Routes — Maramag Home Food Pre-Order Manager
 
-**Base URL:** `https://fantastic-spoon-jr4rg4grq94pfj7vp-3000.app.github.dev`
+**Base URL:** 
 **Response Standard:** `{ status, data, error }`
 
 ---
