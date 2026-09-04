@@ -4,11 +4,6 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-const express = require('express');
-const app = express();
-
-app.use(express.json());
-
 // ✅ SIMPLE CORS — WORKS EVERYWHERE (Codespaces + local)
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
