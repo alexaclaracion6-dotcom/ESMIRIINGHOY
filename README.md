@@ -75,15 +75,10 @@ A CRUD app for local home‑based food sellers to manage menu items, orders, cus
 |   07-27-26   |      2     |       Juan Dela Cruz        |   burgers    |   3pcs  |      220          |    220       |        cash        |        pickup         |     done    |
 | **TOTAL** | --- | --- | **Total:** | **0** | --- | **₱ 0.00** | --- | --- | --- |
 
-# ==========================================
-# 📋 DISPLAY CURRENT WORKFLOW ORDERS QUEUE
-# ==========================================
-st.write("---")
-st.write("### 📋 Active Orders Log View")
+## Running Tests
 
-if "orders_db" in st.session_state and st.session_state.orders_db:
-    # Show all orders in a clean table
-    st.dataframe(pd.DataFrame(st.session_state.orders_db), use_container_width=True)
-else:
-    # Friendly message when empty
-    st.info("📭 No orders captured today yet.")
+To run the full test suite:
+
+```bash
+npm test
+
