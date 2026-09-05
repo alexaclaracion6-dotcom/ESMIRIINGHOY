@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const menuRoutes = require("./menuRoutes"); // 
+const orderRoutes = require("./orderRoutes");
 app.use("/menu", menuRoutes); // 
+app.use("/orders", orderRoutes);
 
 // Middleware
 app.use(express.json());
